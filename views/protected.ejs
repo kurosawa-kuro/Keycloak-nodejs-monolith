@@ -1,0 +1,38 @@
+<div>
+  <div class="card">
+    <h1>Protected Page</h1>
+    <p>This page is only accessible to authenticated users.</p>
+    <div class="card" style="background:#e6ffe6;">
+      <h3>Authentication Successful!</h3>
+      <p>You have successfully authenticated with Keycloak.</p>
+    </div>
+    <div class="card">
+      <h2>User Information</h2>
+      <ul>
+        <li><b>User ID (sub):</b> <span style="font-family:monospace;"><%= user.sub %></span></li>
+        <li><b>Email:</b> <%= user.email %></li>
+        <li><b>Name:</b> <%= user.name || 'Not provided' %></li>
+        <li><b>Username:</b> <%= user.preferred_username || 'Not provided' %></li>
+        <li><b>Roles:</b> <%= user.roles && user.roles.length > 0 ? user.roles.join(', ') : 'No roles assigned' %></li>
+      </ul>
+    </div>
+    <% if (userProfile) { %>
+      <div class="card" style="background:#e6f0ff;">
+        <h2>Profile Information</h2>
+        <ul>
+          <li><b>Nickname:</b> <%= userProfile.nickname %></li>
+          <li><b>Profile Email:</b> <%= userProfile.email %></li>
+          <li><b>Created At:</b> <%= new Date(userProfile.createdAt).toLocaleString() %></li>
+          <li><b>Last Updated:</b> <%= new Date(userProfile.updatedAt).toLocaleString() %></li>
+        </ul>
+      </div>
+    <% } %>
+    <div>
+      <a href="/me" class="btn">View JSON Profile</a>
+      <a href="/public" class="btn" style="background:#eee;color:#333;">Back to Public</a>
+      <% if (user.roles && user.roles.includes('admin')) { %>
+        <a href="/admin" class="btn" style="background:#a78bfa;">Admin Panel</a>
+      <% } %>
+    </div>
+  </div>
+</div> 

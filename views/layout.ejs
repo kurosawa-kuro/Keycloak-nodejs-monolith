@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - Keycloak Express Monolith</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/" class="flex-shrink-0 flex items-center">
+                        <span class="text-xl font-bold text-gray-900">Keycloak Express</span>
+                    </a>
+                    <div class="hidden md:ml-6 md:flex md:space-x-8">
+                        <a href="/public" class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">Public</a>
+                        <% if (user) { %>
+                            <a href="/protected" class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">Protected</a>
+                            <% if (user.roles && user.roles.includes('admin')) { %>
+                                <a href="/admin" class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">Admin</a>
+                            <% } %>
+                        <% } %>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <% if (user) { %>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-gray-700">
+                                <%= user.name || user.preferred_username || user.email %>
+                            </span>
+                            <a href="/logout" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium">
+                                Logout
+                            </a>
+                        </div>
+                    <% } else { %>
+                        <a href="/login" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                            Login
+                        </a>
+                        <a href="/register" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium">
+                            Register
+                        </a>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <%- body %>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t mt-auto">
+        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-sm text-gray-500">
+                <p>&copy; 2024 Keycloak Express Monolith. Built with Node.js, Express, and Keycloak.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

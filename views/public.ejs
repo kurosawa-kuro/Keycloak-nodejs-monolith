@@ -1,0 +1,44 @@
+<div>
+  <div class="card">
+    <div style="text-align:center;">
+      <h1>Welcome to Public Page</h1>
+      <p>This page is accessible to everyone, including unauthenticated users.</p>
+      <% if (user) { %>
+        <div class="card" style="background:#e6ffe6;">
+          <h3>You are logged in!</h3>
+          <p>Welcome back, <strong><%= user.name || user.preferred_username || user.email %></strong>!</p>
+          <% if (userProfile) { %>
+            <p>Your nickname: <strong><%= userProfile.nickname %></strong></p>
+          <% } %>
+        </div>
+        <div>
+          <a href="/protected" class="btn">Go to Protected Page</a>
+          <a href="/me" class="btn" style="background:#eee;color:#333;">View My Profile</a>
+        </div>
+      <% } else { %>
+        <div class="card" style="background:#e6f0ff;">
+          <h3>Not logged in</h3>
+          <p>You can access this page without authentication.</p>
+        </div>
+        <div>
+          <a href="/login" class="btn">Login</a>
+          <a href="/register" class="btn" style="background:#22c55e;">Register</a>
+        </div>
+      <% } %>
+    </div>
+  </div>
+  <div style="margin-top:2rem;">
+    <div class="card">
+      <h3>Secure Authentication</h3>
+      <p>Powered by Keycloak OIDC</p>
+    </div>
+    <div class="card">
+      <h3>User Profiles</h3>
+      <p>Extended profile data storage</p>
+    </div>
+    <div class="card">
+      <h3>Fast & Modern</h3>
+      <p>Built with Express & EJS</p>
+    </div>
+  </div>
+</div> 

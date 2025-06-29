@@ -1,0 +1,25 @@
+<div>
+  <div class="card" style="text-align:center;">
+    <h1>Error <%= error.status || 500 %></h1>
+    <p><%= error.message || 'An unexpected error occurred' %></p>
+    <div class="card" style="background:#ffe6e6;">
+      <h3>Something went wrong</h3>
+      <p>Please try again or contact support if the problem persists.</p>
+    </div>
+    <% if (process.env.NODE_ENV === 'development' && error.stack) { %>
+      <div class="card" style="background:#f1f5f9;">
+        <h2>Error Details (Development)</h2>
+        <pre style="text-align:left; background:#eee; padding:1rem; border-radius:6px; max-height:300px; overflow:auto;"><%= error.stack %></pre>
+      </div>
+    <% } %>
+    <div>
+      <a href="/public" class="btn">Go to Public Page</a>
+      <% if (user) { %>
+        <a href="/protected" class="btn" style="background:#eee;color:#333;">Go to Protected Page</a>
+      <% } else { %>
+        <a href="/login" class="btn" style="background:#eee;color:#333;">Login</a>
+      <% } %>
+      <button onclick="history.back()" class="btn" style="background:#eee;color:#333;">Go Back</button>
+    </div>
+  </div>
+</div> 
